@@ -1,0 +1,19 @@
+{
+  "title": "Podcasts",
+  "properties": {
+    "name": {
+      "format": "single-line",
+      "title": "Name",
+      "type": "string",
+      "displayPriority": 1
+    },
+    "podcasts-info": {
+      "format": "single-line",
+      "title": "Podcasts",
+      "type": "array",
+      "displayPriority": 2
+    }
+  },
+  "titleProperty": "name",
+  "type": "object"
+}

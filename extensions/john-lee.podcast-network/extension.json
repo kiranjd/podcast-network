@@ -1,0 +1,35 @@
+{
+  "name": "podcast-network",
+  "title": "Podcast-network",
+  "version": "0.0.1",
+  "description": "",
+  "platform": "1.0.*",
+  "screens": [
+    {
+      "name": "PodList"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "PodList",
+      "title": "Pod list",
+      "description": "A shortcut for PodList",
+      "screen": "@.PodList",
+      "adminPages": [
+        {
+          "page": "shoutem.cms.CmsPage",
+          "title": "Podcast List",
+          "parameters": {
+            "schema": "@.Podcasts"
+          }
+        }
+      ]
+    }
+  ],
+  "dataSchemas": [
+    {
+      "name": "Podcasts",
+      "path": "server/data-schemas/Podcasts.json"
+    }
+  ]
+}
