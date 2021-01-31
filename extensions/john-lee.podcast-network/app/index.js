@@ -5,4 +5,8 @@
 // export everything from extension.js
 export * from "./extension";
 
+import reducer from "./reducer";
+
+export { reducer };
+
 // list of exports supported by shoutem can be found here: https://shoutem.github.io/docs/extensions/reference/extension-exports

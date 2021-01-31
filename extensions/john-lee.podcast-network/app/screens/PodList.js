@@ -1,16 +1,38 @@
-import React, { Component } from "react";
-
+import React, { Component, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { connect } from "react-redux";
+import { find, isBusy, shouldRefresh, getCollection } from "@shoutem/redux-io";
+import { navigateTo } from "shoutem.navigation";
 
-export default class PodList extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Hello World!</Text>
-      </View>
-    );
+import { ext } from "../const";
+
+const renderPodcast = ({ id, name }) => {
+  return (
+    <View key={id}>
+      <Text style={styles.text}>{name}</Text>
+    </View>
+  );
+};
+
+const PodList = ({ navigateTo, find, podcasts }) => {
+  useEffect(() => {
+    if (shouldRefresh(podcasts)) {
+      find(ext("Podcasts"), "podcasts");
+    }
+  }, []);
+
+  return <View style={styles.container}>{podcasts.map(renderPodcast)}</View>;
+};
+
+export default connect(
+  state => ({
+    podcasts: getCollection(state[ext()]?.allPodcasts, state)
+  }),
+  {
+    navigateTo,
+    find
   }
-}
+)(PodList);
 
 const styles = StyleSheet.create({
   container: {

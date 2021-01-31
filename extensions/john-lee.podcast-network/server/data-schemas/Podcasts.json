@@ -7,10 +7,10 @@
       "type": "string",
       "displayPriority": 1
     },
-    "podcasts-info": {
+    "rssLink": {
       "format": "single-line",
-      "title": "Podcasts",
-      "type": "array",
+      "title": "RSS of Podcast",
+      "type": "string",
       "displayPriority": 2
     }
   },
