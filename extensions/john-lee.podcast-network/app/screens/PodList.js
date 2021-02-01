@@ -1,3 +1,4 @@
+
 import React, { Component, useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
@@ -6,10 +7,17 @@ import { navigateTo } from "shoutem.navigation";
 
 import { ext } from "../const";
 
+import {   
+  TouchableOpacity,
+  Title,
+  Caption,
+  Tile,
+  ImageBackground} from '@shoutem/ui';
+
 const renderPodcast = ({ id, name }) => {
   return (
     <View key={id}>
-      <Text style={styles.text}>{name}</Text>
+      <Text style={styles.text}>name: {name}</Text>
     </View>
   );
 };
@@ -21,7 +29,23 @@ const PodList = ({ navigateTo, find, podcasts }) => {
     }
   }, []);
 
-  return <View style={styles.container}>{podcasts.map(renderPodcast)}</View>;
+  return (
+    <View>
+      <View style={styles.container}>{podcasts.map(renderPodcast)}</View>
+      <TouchableOpacity>
+        <View styleName="sm-gutter featured">
+          <ImageBackground styleName="featured placeholder">
+            <Tile>
+              <Title>Featured Podcast Name</Title>
+              <View styleName="horizontal md-gutter-top" virtual>
+                <Caption numberOfLines={1} styleName="collapsible">caption</Caption>
+              </View>
+            </Tile>            
+          </ImageBackground>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default connect(
@@ -37,10 +61,10 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center"
   },
   text: {
     fontSize: 50
   }
 });
+
