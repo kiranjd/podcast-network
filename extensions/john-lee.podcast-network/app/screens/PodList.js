@@ -4,13 +4,24 @@ import { connect } from "react-redux";
 import { find, isBusy, shouldRefresh, getCollection } from "@shoutem/redux-io";
 import { navigateTo } from "shoutem.navigation";
 
+import { NavigationBar } from "shoutem.navigation";
+import {
+  ImageBackground,
+  ListView,
+  Tile,
+  Title,
+  Subtitle,
+  Overlay,
+  Screen
+} from "@shoutem/ui";
+
 import { ext } from "../const";
 
 const renderPodcast = ({ id, name }) => {
   return (
-    <View key={id}>
-      <Text style={styles.text}>{name}</Text>
-    </View>
+    <Tile>
+      <Title>{name}</Title>
+    </Tile>
   );
 };
 
@@ -19,9 +30,18 @@ const PodList = ({ navigateTo, find, podcasts }) => {
     if (shouldRefresh(podcasts)) {
       find(ext("Podcasts"), "podcasts");
     }
-  }, []);
+  }, [podcasts]);
 
-  return <View style={styles.container}>{podcasts.map(renderPodcast)}</View>;
+  return (
+    <Screen>
+      <NavigationBar title="PODCASTS" />
+      <ListView
+        data={podcasts}
+        renderRow={renderPodcast}
+        loading={isBusy(podcasts)}
+      />
+    </Screen>
+  );
 };
 
 export default connect(
