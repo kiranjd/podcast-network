@@ -1,10 +1,9 @@
-import React, { Component, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
 import { find, isBusy, shouldRefresh, getCollection } from "@shoutem/redux-io";
-import { navigateTo } from "shoutem.navigation";
+import { navigateTo, NavigationBar } from "shoutem.navigation";
 
-import { NavigationBar } from "shoutem.navigation";
 import {
   ImageBackground,
   ListView,
@@ -12,33 +11,53 @@ import {
   Title,
   Subtitle,
   Overlay,
-  Screen
+  Screen,
+  Caption,
+  Row
 } from "@shoutem/ui";
 
 import { ext } from "../const";
 
-const renderPodcast = ({ id, name }) => {
+const renderPodcast = ({ id, name }, onPress) => {
   return (
-    <Tile>
-      <Title>{name}</Title>
-    </Tile>
+    <TouchableOpacity onPress={onPress}>
+      <Row key={id} style={styles.podcastItem}>
+        <Image
+          style={styles.podcastImage}
+          source={{
+            uri: "https://shoutem.github.io/img/ui-toolkit/examples/image-6.png"
+          }}
+        />
+        <View styleName="stretch space-between">
+          <Subtitle>{name}</Subtitle>
+          <Caption>Educational Podcast</Caption>
+        </View>
+      </Row>
+    </TouchableOpacity>
   );
 };
 
 const PodList = ({ navigateTo, find, podcasts }) => {
   useEffect(() => {
     if (shouldRefresh(podcasts)) {
-      find(ext("Podcasts"), "podcasts");
+      find(ext("Podcasts"), "all");
     }
-  }, [podcasts]);
+  });
+
+  const onPodcastPress = () => {
+    navigateTo({
+      screen: "shoutem.podcast.EpisodesListScreen",
+      props: { podcasts }
+    });
+  };
 
   return (
     <Screen>
-      <NavigationBar title="PODCASTS" />
+      <NavigationBar centerComponent={<Title>TITLE</Title>} />
       <ListView
-        data={podcasts}
-        renderRow={renderPodcast}
         loading={isBusy(podcasts)}
+        data={podcasts}
+        renderRow={item => renderPodcast(item, onPodcastPress)}
       />
     </Screen>
   );
@@ -62,5 +81,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 50
+  },
+  podcastItem: {
+    marginBottom: 4
+  },
+  podcastImage: {
+    marginLeft: 4,
+    marginRight: 8,
+    width: 40,
+    height: 40,
+    borderRadius: 4
   }
 });
