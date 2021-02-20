@@ -18,15 +18,15 @@ dependencies.json
 /ios/RNPlaceholder.swift
 /android/app/google-services.json
 
-/ios/*.xcodeproj
-/ios/*.xcworkspace
-/ios/**/Base.lproj
-/ios/**/Images.xcassets
-/ios/**/AppDelegate.h
-/ios/**/AppDelegate.m
-/ios/**/Info.plist
-/ios/**/main.m
-/ios/**/*.entitlements
+!/ios/*.xcodeproj
+!/ios/*.xcworkspace
+!/ios/**/Base.lproj
+!/ios/**/Images.xcassets
+!/ios/**/AppDelegate.h
+!/ios/**/AppDelegate.m
+!/ios/**/Info.plist
+!/ios/**/main.m
+!/ios/**/*.entitlements
 !/ios/ShoutemApp
 !/ios/ShoutemApp.*
 !/ios/ShoutemApp/Base.lproj
