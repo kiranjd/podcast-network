@@ -1,5 +1,5 @@
 build-script/tmp
-extensions.js
+#extensions.js
 !preview-app/**/extensions.js
 config.json
 !preview-app/**/config.json
@@ -7,7 +7,7 @@ config.json
 temp
 cached-bundles
 yarn.lock
-ios/Podfile
+#ios/Podfile
 ios/Pods
 ios/Podfile.lock
 config/
